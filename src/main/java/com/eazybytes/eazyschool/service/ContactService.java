@@ -7,9 +7,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 @Slf4j
 @Service
-@RequestScope
 public class ContactService {
-    private int counter = 0;
 
     public ContactService(){
         System.out.println("Contact Service Bean initialized");
@@ -22,11 +20,5 @@ public class ContactService {
         return isSaved;
     }
 
-    public int getCounter() {
-        return counter;
-    }
 
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
 }
