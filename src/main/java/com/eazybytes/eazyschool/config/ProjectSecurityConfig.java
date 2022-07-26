@@ -10,9 +10,11 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+
+        http.csrf().ignoringAntMatchers("/saveMsg").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
+                .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/home").permitAll()
                 .mvcMatchers("/holidays/**").permitAll()
                 .mvcMatchers("/contact").permitAll()
@@ -24,6 +26,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                 .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
+
+
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password("12345").roles("USER")
                 .and()
-                .withUser("admin").password("54321").roles("USER", "ADMIN")
+                .withUser("admin").password("54321").roles("ADMIN")
                 .and().passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 }
