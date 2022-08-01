@@ -2,7 +2,6 @@ package com.eazybytes.eazyschool.repository;
 
 import com.eazybytes.eazyschool.model.Contact;
 import com.eazybytes.eazyschool.model.Holiday;
-import com.eazybytes.eazyschool.rowmappers.ContactRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
