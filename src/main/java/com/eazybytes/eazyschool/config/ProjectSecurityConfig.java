@@ -34,6 +34,9 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic();
 
     }
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
