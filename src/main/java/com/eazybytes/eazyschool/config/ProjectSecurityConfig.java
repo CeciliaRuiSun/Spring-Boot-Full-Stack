@@ -16,13 +16,16 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**").and()
+        http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**")
+                .ignoringAntMatchers("/admin/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
                 .mvcMatchers("/displayProfile").authenticated()
                 .mvcMatchers("/updateProfile").authenticated()
                 .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/student/**").hasRole("STUDENT")
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .mvcMatchers("/api/**").authenticated()
                 .mvcMatchers("/home").permitAll()
                 .mvcMatchers("/holidays/**").permitAll()
                 .mvcMatchers("/contact").permitAll()
